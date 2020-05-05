@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_secure_password
   has_many :my_tasks, class_name: 'Task', foreign_key: :author_id
@@ -7,6 +9,5 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :first_name, length: { minimum: 2 }
   validates :last_name, length: { minimum: 2 }
-  validates :email,  format: { with: /@/ }, uniqueness: true
-
+  validates :email, format: { with: /@/ }, uniqueness: true
 end
