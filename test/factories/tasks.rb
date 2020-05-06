@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :task do
-    name { "MyString" }
-    description { "MyText" }
-    author_id { 1 }
-    assignee_id { 1 }
-    state { "MyString" }
-    expired_at { "2020-05-04" }
+    sequence(:name) { |n| "name#{n}" }
+    sequence(:description) { |n| "description#{n}" }
+    sequence(:author_id) { |n| n }
+    sequence(:assignee_id) { |n| n + 2 }
+    sequence(:state) { |n| "state#{n}" }
+    sequence(:expired_at) { |n| Time.now + n.days.to_s }
   end
 end
