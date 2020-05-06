@@ -5,7 +5,6 @@ FactoryBot.define do
     sequence(:password) { |n| "password#{n}" }
     sequence(:email) { |n| "person#{n}@example.com" }
     sequence(:avatar) { |n| "avatar#{n}" }
-    sequence(:type) { |n|   "avatar#{n}" }
     sequence :type do |n|
       if n = 1 and n % 3 = 1 
         'admin'
