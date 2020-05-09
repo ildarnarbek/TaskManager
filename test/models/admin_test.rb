@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DeveloperTest < ActiveSupport::TestCase
+class AdminTest < ActiveSupport::TestCase
   test "create" do
     developer = create :admin
     assert developer.persisted?
