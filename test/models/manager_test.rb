@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ManagerTest < ActiveSupport::TestCase
   test "create" do
-    developer = create :manager
-    assert developer.persisted?
+    manager = create :manager
+    assert manager.persisted?
   end
 end
