@@ -1,7 +1,8 @@
 require 'test_helper'
 
-class ManagerTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class DeveloperTest < ActiveSupport::TestCase
+  test "create" do
+    developer = create :manager
+    assert developer.persisted?
+  end
 end
