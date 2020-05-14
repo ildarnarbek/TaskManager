@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   namespace :web do
     get 'developers/new'
   end
+
+  namespace :admin do
+    resources :users
+  end
+  
   root :to => "web/boards#show"
 
   scope module: :web do
