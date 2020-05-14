@@ -7,7 +7,13 @@ class Web::DevelopersControllerTest < ActionController::TestCase
   end
 
   test 'should post create' do
-    post :create, params: { developer: attributes_for(:developer) }
+    params = attributes_for(:developer)
+
+    post :create, params: { developer: params }
     assert_response :redirect
+
+    developer = Developer.find_by(first_name: params[:first_name])
+
+    assert developer.present?
   end
 end

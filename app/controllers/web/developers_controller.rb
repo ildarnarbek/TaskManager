@@ -8,6 +8,7 @@ class Web::DevelopersController < Web::ApplicationController
 
     if @developer.save
       sign_in(@developer)
+
       redirect_to(:board)
     else
       render(:new)
