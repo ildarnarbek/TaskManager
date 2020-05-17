@@ -32,7 +32,14 @@ class Api::V1::TaskController < Api::V1::ApplicationController
   def self.responder
     JsonResponder
   end
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
   
+    respond_with(task)
+  end
+
   private
   
   def task_params
