@@ -33,7 +33,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     user = attributes_for(:user)
     post :create, params: { user: user }
     assert_response :redirect
-    
+
     created_user = User.find_by(first_name: user[:first_name])
     created_user.present?
     assert created_user[:last_name] == user[:last_name]
@@ -47,7 +47,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     patch :update, params: { id: user.id, user: user_attrs }
     assert_response :redirect
 
-    updated_user = User.find(user.id
+    updated_user = User.find(user.id)
     assert updated_user[:first_name] == user_attrs[:first_name]
     assert updated_user[:last_name] == user_attrs[:last_name]
     assert updated_user[:email] == user_attrs[:email]
