@@ -3,11 +3,11 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   respond_to :json
 
   def index
-    tasks = Task.all
-                .ransack(ransack_params)
-                .result
-                .page(page)
-                .per(per_page)
+    tasks = Task
+      .ransack(ransack_params)
+      .result
+      .page(page)
+      .per(per_page)
   
     respond_with(tasks, each_serializer: TaskSerializer, root: 'items', meta: build_meta(tasks))
   end
@@ -19,9 +19,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def create
-    # byebug
     task = current_user.my_tasks.new(task_params)
-    byebug
     task.save
     
     respond_with(task, serializer: TaskSerializer, location: nil)
@@ -48,6 +46,6 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   private
   
   def task_params
-    params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state_event)
+    params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state_event, :expired_at)
   end
 end
