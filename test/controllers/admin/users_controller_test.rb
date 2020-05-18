@@ -34,10 +34,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
     post :create, params: { user: user }
     assert_response :redirect
 
-    created_user = User.find_by(first_name: user[:first_name])
+    created_user = User.find_by(email: user[:email])
     created_user.present?
     assert created_user[:last_name] == user[:last_name]
-    assert created_user[:email] == user[:email]
+    assert created_user[:first_name] == user[:first_name]
     assert created_user[:type] == user[:type]
   end
 
