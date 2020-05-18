@@ -21,9 +21,13 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
       merge({ assignee_id: assignee.id })
     post :create, params: { task: task_attributes, format: :json }
     assert_response :created
+    
+    # byebug
 
     data = JSON.parse(response.body)
     created_task = Task.find(data['task']['id'])
+
+    byebug
 
     assert created_task.present?
     assert_equal task_attributes.stringify_keys, created_task.slice(*task_attributes.keys)
@@ -39,6 +43,8 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
 
     patch :update, params: { id: task.id, format: :json, task: task_attributes }
     assert_response :success
+    
+    # byebug
 
     task.reload
     assert_equal task.slice(*task_attributes.keys), task_attributes
