@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from '@lourenci/react-kanban';
 
+
 const data = {
   columns: [
     {
@@ -29,7 +30,7 @@ const data = {
 }
 
 const TaskBoard = () => {
-  return <Board initialBoard={data} />;
+  return <Board initialBoard={data} disableColumnDrag/>;
 };
 
 export default TaskBoard;
