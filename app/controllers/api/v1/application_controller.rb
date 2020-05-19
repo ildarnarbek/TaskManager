@@ -1,5 +1,7 @@
 class Api::V1::ApplicationController < Api::ApplicationController
   include AuthHelper
+
+  respond_to :json
   
   RANSACK_DEFAULT_SORT = 'id ASC'
 
@@ -25,4 +27,9 @@ class Api::V1::ApplicationController < Api::ApplicationController
     per = params.fetch(:per, 10).to_i
     per > 100 ? 100 : per
   end
+
+  def self.responder
+    JsonResponder
+  end
+
 end
