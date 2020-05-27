@@ -3,6 +3,7 @@ import KanbanBoard from '@lourenci/react-kanban';
 import { propOr } from 'ramda';
 
 import Task from 'components/Task';
+import ColumnHeader from 'components/ColumnHeader';
 import TasksRepository from 'repositories/TasksRepository';
 
 const STATES = [
@@ -16,19 +17,32 @@ const STATES = [
 ];
 
 const initialBoard = {
-  columns: STATES.map(column => ({
+  columns: STATES.map((column) => ({
     id: column.key,
     title: column.value,
     cards: [],
     meta: {},
-  }))
+  })),
 };
 
 const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
-  useEffect(() => loadBoard(), []);
-  useEffect(() => generateBoard(), [boardCards]);
+
+  const generateBoard = () => {
+    const board = {
+      columns: STATES.map(({ key, value }) => {
+        return {
+          id: key,
+          title: value,
+          cards: propOr({}, 'cards', boardCards[key]),
+          meta: propOr({}, 'meta', boardCards[key]),
+        };
+      }),
+    };
+
+    setBoard(board);
+  };
 
   const loadColumn = (state, page, perPage) => {
     return TasksRepository.index({
@@ -41,6 +55,14 @@ const TaskBoard = () => {
   const loadColumnInitial = (state, page = 1, perPage = 10) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => {
+        // console.log('data');
+        // console.log({ data });
+        // console.log('prevState');
+        // console.log(prevState);
+        console.log('state');
+        console.log(state);
+        console.log('cards');
+        console.log(data.items);
         return {
           ...prevState,
           [state]: { cards: data.items, meta: data.meta },
@@ -49,26 +71,31 @@ const TaskBoard = () => {
     });
   };
 
-  const generateBoard = () => {
-    const board = {
-      columns: STATES.map(({ key, value }) => {
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    loadColumn(state, page, perPage).then(({ data }) => {
+      setBoardCards((prevState) => {
         return {
-          id: key,
-          title: value,
-          cards: propOr({}, 'cards', boardCards[key]),
-          meta: propOr({}, 'meta', boardCards[key]),
-        }
-      })
-    }
-
-    setBoard(board);
-  }
+          ...prevState,
+          [state]: { cards: data.items, meta: data.meta },
+        };
+      });
+    });
+  };
 
   const loadBoard = () => {
     STATES.map(({ key }) => loadColumnInitial(key));
   };
+  useEffect(() => loadBoard(), []);
+  useEffect(() => generateBoard(), [boardCards]);
 
-  return <KanbanBoard renderCard={card => <Task task={card} />}>{board}</KanbanBoard>;
+  return (
+    <KanbanBoard
+      renderCard={(card) => <Task task={card} />}
+      renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+    >
+      {board}
+    </KanbanBoard>
+  );
 };
 
 export default TaskBoard;
