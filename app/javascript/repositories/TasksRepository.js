@@ -18,7 +18,12 @@ export default {
   },
 
   create(task = {}) {
-    const path = routes.apiV1TaskPath();
+    console.log('TR > f create---------------');
+    console.log('task');
+    console.log(task);
+    const path = routes.apiV1TasksPath();
+    console.log('path');
+    console.log(path);
     return FetchHelper.post(path, task);
   },
 
