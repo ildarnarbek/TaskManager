@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { has } from 'ramda';
 
@@ -20,20 +20,11 @@ const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
-  // ////////////////////
-  useEffect(() => {
-    console.info(task);
-  }, [task]);
-
-  // ///////////
 
   const handleCreate = () => {
     setSaving(true);
 
     onCreateCard(task).catch((error) => {
-      console.log('AP > f onCreateCard');
-      console.log('task');
-      console.log(task);
       setSaving(false);
       setErrors(error || {});
 

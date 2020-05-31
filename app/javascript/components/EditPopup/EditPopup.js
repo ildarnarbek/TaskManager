@@ -17,17 +17,6 @@ import Form from './components/Form';
 import useStyles from './useStyles';
 
 const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
-    console.log('cardId');
-    console.log(cardId);
-    console.log('onClose');
-    console.log(onClose);
-    console.log(onCardDestroy);
-
-    console.log(onCardUpdate);
-
-    console.log('all');
-
-    
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});

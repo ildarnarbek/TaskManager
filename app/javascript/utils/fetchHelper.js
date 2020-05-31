@@ -46,14 +46,7 @@ export default {
   },
 
   post(url, json) {
-    console.log('FH > f post---------------');
-    console.log('url');
-    console.log(url);
-    console.log('json');
-    console.log(json);
     const body = decamelize(json);
-    console.log('body');
-    console.log(body);
     return axios.post(url, body).then(camelize);
   },
 
