@@ -61,15 +61,6 @@ const TaskBoard = () => {
   const loadColumnInitial = (state, page = 1, perPage = 10) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => {
-        // console.log('data');
-        // console.log({ data });
-        // console.log('prevState');
-        // console.log(prevState);
-        // console.log('state');
-        // console.log(state);
-        // console.log('cards');
-        // console.log(data.items);
-        // console.log(data.meta);
         return {
           ...prevState,
           [state]: { cards: data.items, meta: data.meta },
@@ -101,7 +92,7 @@ const TaskBoard = () => {
       return null;
     }
 
-    return TasksRepository.update(task.id, { stateEvent: transition.event })
+    return TasksRepository.update(task.id, { task: { stateEvent: transition.event } })
       .then(() => {
         loadColumnInitial(destination.toColumnId);
         loadColumnInitial(source.fromColumnId);
