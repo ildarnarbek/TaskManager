@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import AsyncSelect from 'react-select/async';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
 import InputLabel from '@material-ui/core/InputLabel';
 
 import UsersRepository from 'repositories/UsersRepository';
@@ -53,6 +52,20 @@ UserSelect.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.shape(),
   helperText: PropTypes.string,
+};
+
+UserSelect.defaultProps = {
+  error: false,
+  isClearable: false,
+  isDisabled: false,
+  isRequired: false,
+  onChange: () => {},
+  value: {
+    firstName: '',
+    lastName: '',
+    email: '',
+  },
+  helperText: '',
 };
 
 export default UserSelect;
