@@ -20,22 +20,18 @@ const ColumnHeader = ({ column, onLoadMore }) => {
 
   const handleLoadMore = () => onLoadMore(id, currentPage + 1);
 
-  let loadButton;
-
-  if (count < totalCount) {
-    loadButton = (
-      <IconButton aria-label="Load more" onClick={handleLoadMore}>
-        <SystemUpdateAltIcon fontSize="small" />
-      </IconButton>
-    );
-  }
-
   return (
     <div className={styles.root}>
       <div className={styles.title}>
         <b>{title}</b> ({count}/{totalCount || '…'})
       </div>
-      <div className={styles.actions}>{loadButton}</div>
+      <div className={styles.actions}>
+        {count !== totalCount && (
+          <IconButton aria-label="Load more" onClick={handleLoadMore}>
+            <SystemUpdateAltIcon fontSize="small" />
+          </IconButton>
+        )}
+      </div>
     </div>
   );
 };
