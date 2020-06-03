@@ -7,6 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import UsersRepository from 'repositories/UsersRepository';
+import UserPresenter from 'components/presenters/UserPresenter.js';
 
 import useStyles from './useStyles';
 
@@ -15,7 +16,6 @@ const UserSelect = ({ error, label, isClearable, isDisabled, isRequired, onChang
   const styles = useStyles();
   const handleLoadOptions = (inputValue) =>
     UsersRepository.index({ q: { firstNameOrLastNameCont: inputValue } }).then(({ data }) => data.items);
-
   return (
     <>
       <FormControl margin="dense" disabled={isDisabled} focused={isFocused} error={error} required={isRequired}>
@@ -25,7 +25,7 @@ const UserSelect = ({ error, label, isClearable, isDisabled, isRequired, onChang
             cacheOptions
             loadOptions={handleLoadOptions}
             defaultOptions
-            getOptionLabel={(user) => `${user.firstName} ${user.lastName}`}
+            getOptionLabel={(user) => UserPresenter.fullName(user)}
             getOptionValue={(user) => user.id}
             isDisabled={isDisabled}
             isClearable={isClearable}
