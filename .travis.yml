@@ -1,4 +1,7 @@
-languge: ruby
+languge: 
+  - ruby
+os: 
+  - linux
 sudo: required
 services:
   - docker
