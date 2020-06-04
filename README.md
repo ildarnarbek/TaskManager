@@ -1,4 +1,5 @@
 # README
+[![Build Status](https://travis-ci.com/ildarnarbek/TaskManager.svg?branch=feature%2Fdevops)](https://travis-ci.com/ildarnarbek/TaskManager)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
