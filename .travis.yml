@@ -1,3 +1,4 @@
+languge: ruby
 sudo: required
 services:
   - docker
