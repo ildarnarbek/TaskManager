@@ -7,7 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import UsersRepository from 'repositories/UsersRepository';
-import UserPresenter from 'components/presenters/UserPresenter.js';
+import UserPresenter from 'presenters/UserPresenter';
 
 import useStyles from './useStyles';
 

@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 
 import useStyles from './useStyles';
-import TaskPresenter from 'components/presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 const Task = ({ task, onClick }) => {
   const styles = useStyles;

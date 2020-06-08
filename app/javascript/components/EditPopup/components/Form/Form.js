@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import useStyles from './useStyles';
 import UserSelect from 'components/UserSelect';
-import TaskPresenter from 'components/presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 const Form = ({ errors, onChange, task }) => {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
@@ -36,7 +36,7 @@ const Form = ({ errors, onChange, task }) => {
       />
       <UserSelect
         label="Author"
-        value={task.author}
+        value={TaskPresenter.author(task)}
         onChange={handleChangeSelect('author')}
         isDisabled
         isRequired
@@ -45,7 +45,7 @@ const Form = ({ errors, onChange, task }) => {
       />
       <UserSelect
         label="Assignee"
-        value={task.assignee}
+        value={TaskPresenter.assignee()}
         onChange={handleChangeSelect('assignee')}
         isRequired
         error={has('assignee', errors)}

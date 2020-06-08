@@ -11,6 +11,7 @@ import TasksRepository from 'repositories/TasksRepository';
 import TaskForm from 'forms/TaskForm';
 import AddPopup from 'components/AddPopup';
 import EditPopup from 'components/EditPopup';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -125,7 +126,7 @@ const TaskBoard = () => {
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      loadColumnInitial(task.state);
+      loadColumnInitial(TaskPresenter.state(task));
       handleClose();
     });
   };
@@ -137,14 +138,14 @@ const TaskBoard = () => {
     const attributes = TaskForm.attributesToSubmit(task);
 
     return TasksRepository.update(task.id, attributes).then(() => {
-      loadColumnInitial(task.state);
+      loadColumnInitial(TaskPresenter.state(task));
       handleClose();
     });
   };
 
   const handleTaskDestroy = (task) => {
     return TasksRepository.destroy(task.id).then(() => {
-      loadColumnInitial(task.state);
+      loadColumnInitial(TaskPresenter.state(task));
       handleClose();
     });
   };
