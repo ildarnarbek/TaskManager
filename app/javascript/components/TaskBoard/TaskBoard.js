@@ -126,7 +126,7 @@ const TaskBoard = () => {
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      loadColumnInitial(TaskPresenter.state(task));
+      loadColumnInitial(task.state);
       handleClose();
     });
   };
@@ -138,14 +138,14 @@ const TaskBoard = () => {
     const attributes = TaskForm.attributesToSubmit(task);
 
     return TasksRepository.update(task.id, attributes).then(() => {
-      loadColumnInitial(TaskPresenter.state(task));
+      loadColumnInitial(task.state);
       handleClose();
     });
   };
 
   const handleTaskDestroy = (task) => {
     return TasksRepository.destroy(task.id).then(() => {
-      loadColumnInitial(TaskPresenter.state(task));
+      loadColumnInitial(task.state);
       handleClose();
     });
   };
