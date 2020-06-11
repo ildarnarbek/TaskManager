@@ -45,7 +45,7 @@ const Form = ({ errors, onChange, task }) => {
       />
       <UserSelect
         label="Assignee"
-        value={TaskPresenter.assignee()}
+        value={TaskPresenter.assignee(task)}
         onChange={handleChangeSelect('assignee')}
         isRequired
         error={has('assignee', errors)}

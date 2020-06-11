@@ -6,6 +6,6 @@ FactoryBot.define do
     "person#{n}@example.com"
   end
   sequence :expired_at do |n|
-    Date.current + n.days 
+    Date.current + n.days
   end
 end
