@@ -21,4 +21,4 @@ class SessionForm
       errors.add(:email, "email or password doesn't match")
     end
   end
-  end
+end
