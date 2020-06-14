@@ -57,7 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rubocop'
 end
-gem 'slim-rails'
+gem "slim-rails"
 
 gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'
@@ -66,3 +66,6 @@ gem 'active_model_serializers'
 
 gem 'webpacker-react'
 gem 'js-routes'
+
+gem 'simplecov', require: false, group: :test
+gem 'coveralls', require: false
