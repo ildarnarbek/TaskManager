@@ -1,1 +1,5 @@
-| Task #{@task.id} was created
+h3 New task
+p User #{@task.author.first_name} #{@task.author.last_name} create task "#{@task.name}" with id #{@task.id}
+
+p You can contact the author by email #{@task.author.email}
+
