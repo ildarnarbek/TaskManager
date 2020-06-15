@@ -14,7 +14,7 @@ class SessionForm
     User.find_by(email: email)
   end
 
-    private
+  private
 
   def user_valid?
     if user.blank? || !user.authenticate(password)
