@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :web do
+    get 'password_resets/new'
+  end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   namespace :web do
@@ -22,5 +25,6 @@ Rails.application.routes.draw do
     resource :board, only: :show
     resource :session, only: [:new, :create, :destroy]
     resources :developers, only: [:new, :create]
+    resources :password_reset, only: [:new, :create, :edit, :update]
   end
 end
