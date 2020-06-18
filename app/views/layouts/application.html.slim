@@ -24,7 +24,7 @@
          .mdl-layout-spacer
          nav.mdl-navigation
            = link_to "Board", board_path, class: 'mdl-navigation__link'
-           - if current_user
+           - if @current_user
              - if current_user.is_a? Admin
                = link_to "Admin page", admin_users_url, class: 'mdl-navigation__link'
              = current_user.first_name
