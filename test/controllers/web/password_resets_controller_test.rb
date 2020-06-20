@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Web::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get web_password_resets_new_url
+    get new_password_reset_url
     assert_response :success
   end
 
