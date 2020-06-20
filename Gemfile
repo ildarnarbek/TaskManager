@@ -71,3 +71,4 @@ gem 'simplecov', require: false, group: :test
 gem 'coveralls', require: false
 gem 'bullet', group: 'development'
 gem 'rollbar'
+gem 'newrelic_rpm'
