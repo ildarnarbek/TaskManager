@@ -74,3 +74,4 @@ gem 'coveralls', require: false
 gem 'bullet', group: 'development'
 gem 'rollbar'
 gem 'newrelic_rpm'
+gem 'sidekiq'
