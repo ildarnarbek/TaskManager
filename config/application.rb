@@ -2,6 +2,8 @@ require_relative 'boot'
 
 require 'rails/all'
 
+config.active_job.queue_adapter = :sidekiq
+
 Bundler.require(*Rails.groups)
 
 module TaskManager
