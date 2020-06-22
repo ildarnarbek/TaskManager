@@ -5,8 +5,9 @@ class Web::PasswordResetsController < ApplicationController
 
   def create
     @password_reset = PasswordResetForm.new(password_reset_params)
-    @user = @password_reset.user
-    byebug
+    email = @password_reset.email
+    @user = User.find_by(email: email)
+    
     if @password_reset.valid?
       @user.generate_token
       render(:index)
@@ -22,7 +23,6 @@ class Web::PasswordResetsController < ApplicationController
 
   def update
     @user = User.find_by_password_reset_token!(params[:id])
-    byebug
     if @user.password_reset_sent_at < 24.hour.ago
       redirect_to(new_password_reset_path)
     elsif @user.update(user_params)
@@ -40,7 +40,6 @@ class Web::PasswordResetsController < ApplicationController
   end
 
   def user_params
-    params.require(@user).permit(:password, :password_confirmation)
-    # params.require(:developer).permit(:password, :password_confirm)
+    params.require(@user.type.downcase).permit(:password, :password_confirmation)
   end
 end

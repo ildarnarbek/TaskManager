@@ -27,7 +27,7 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
   end
 
   test 'should put update' do
-    user = create(:user)
+    user = create(:developer)
     user.generate_token
     password = generate(:password)
     attrs = { id: user.password_reset_token, developer: { password: password, password_confirmation: password } }
