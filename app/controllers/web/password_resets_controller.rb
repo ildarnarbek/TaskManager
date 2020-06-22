@@ -7,7 +7,7 @@ class Web::PasswordResetsController < ApplicationController
     @password_reset = PasswordResetForm.new(password_reset_params)
     email = @password_reset.email
     @user = User.find_by(email: email)
-    
+
     if @password_reset.valid?
       @user.generate_token
       render(:index)
