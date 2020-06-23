@@ -10,10 +10,10 @@ class Web::PasswordResetsController < ApplicationController
 
     if @password_reset.valid?
       @user.generate_token
-      render(:index)
+      redirect_to(password_resets_path)
       UserMailer.with({ user: @user }).password_reset.deliver_now
     else
-      render(:new)
+      redirect_to(new_password_reset_path)
     end
   end
 
