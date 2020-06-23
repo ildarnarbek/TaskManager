@@ -13,7 +13,12 @@ class User < ApplicationRecord
            password_reset_sent_at: Time.current)
   end
 
-  def change_time_reset_token(user)
-    update(password_reset_sent_at: user.password_reset_sent_at - 1.days - 1.hours)
+  def delete_password_reset_token
+    update(password_reset_token: nil,
+           password_reset_sent_at: nil)
+  end
+
+  def has_active_token?(user)
+    user.password_reset_sent_at + 24.hour > Time.current
   end
 end

@@ -18,15 +18,16 @@ class Web::PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by_password_reset_token!(params[:id])
+    @user = find_user_by_token
+    render(:edit)
   end
 
   def update
-    @user = User.find_by_password_reset_token!(params[:id])
-    if @user.password_reset_sent_at < 24.hour.ago
+    @user = find_user_by_token
+    if !@user.has_active_token?(@user)
       redirect_to(new_password_reset_path)
     elsif @user.update(user_params)
-      @user.change_time_reset_token(@user)
+      @user.delete_password_reset_token
       redirect_to(new_session_path)
     else
       render(:edit)
@@ -41,5 +42,9 @@ class Web::PasswordResetsController < ApplicationController
 
   def user_params
     params.require(@user.type.downcase).permit(:password, :password_confirmation)
+  end
+
+  def find_user_by_token
+    User.find_by(password_reset_token: params[:id])
   end
 end

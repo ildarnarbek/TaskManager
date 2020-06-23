@@ -1,15 +1,16 @@
 h3 Changing password
 
 p
-  -if @user.password_reset_sent_at > 24.hour.ago
+  -if @user.present? && @user.has_active_token?(@user)
     = simple_form_for @user, url: password_reset_url(params[:id]) do |f|
       p
         = f.input :password
         = f.input :password_confirm
       p
         = f.button  :submit, "Confirm"
-p 
-  -if @user.password_reset_sent_at < 24.hour.ago
+p
+  -if !@user.present? || !@user.has_active_token?(@user)
     p This link is not relevant
     = link_to 'Reset password again', new_password_reset_path
+
 
