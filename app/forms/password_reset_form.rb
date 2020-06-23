@@ -12,11 +12,11 @@ class PasswordResetForm
     User.find_by(email: email)
   end
 
-    private
+  private
 
   def user_valid?
     if user.blank?
       errors.add(:email, 'There is no user with this email in the database')
     end
   end
-  end
+end

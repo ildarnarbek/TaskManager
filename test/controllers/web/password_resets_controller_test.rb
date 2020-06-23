@@ -14,7 +14,6 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
       post :create, params: { password_reset_form: attrs }
     end
 
-    
     assert_redirected_to password_resets_path
   end
 
