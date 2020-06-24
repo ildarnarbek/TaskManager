@@ -67,7 +67,7 @@ gem 'active_model_serializers'
 gem 'webpacker-react'
 gem 'js-routes'
 
-gem 'simplecov', require: false, group: :test
+gem 'simplecov','< 0.18.0', require: false, group: :test
 gem 'coveralls', require: false
 gem 'bullet', group: 'development'
 gem 'rollbar'
