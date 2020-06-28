@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  has_one_attached :file
   belongs_to :author, class_name: 'User'
   belongs_to :assignee, class_name: 'User', optional: true
   validates :name, presence: true
