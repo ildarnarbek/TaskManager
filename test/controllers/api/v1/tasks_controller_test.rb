@@ -68,6 +68,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     task = create(:task, author: author)
 
     image = file_fixture('image.jpg')
+
     attachment_params = {
       image: fixture_file_upload(image, 'image/jpeg'),
       crop_x: 190,
@@ -80,7 +81,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert_response :success
 
     task.reload
-    assert { task.image.attached? }
+    assert task.image.attached? 
   end
 
   test 'should put remove_image' do
@@ -96,7 +97,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert_response :success
 
     task.reload
-    refute { task.image.attached? }
+    refute task.image.attached?
   end
 
   def after_teardown
