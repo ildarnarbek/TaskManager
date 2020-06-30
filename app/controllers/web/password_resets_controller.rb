@@ -19,12 +19,11 @@ class Web::PasswordResetsController < ApplicationController
 
   def edit
     @user = find_user_by_token
-    render(:edit)
   end
 
   def update
     @user = find_user_by_token
-    if !@user.has_active_token?(@user)
+    if !@user.has_active_token?
       redirect_to(new_password_reset_path)
     elsif @user.update(user_params)
       @user.delete_password_reset_token

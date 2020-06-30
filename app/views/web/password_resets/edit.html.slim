@@ -1,7 +1,7 @@
 h3 Changing password
 
 p
-  -if @user.present? && @user.has_active_token?(@user)
+  -if @user.present? && @user.has_active_token?
     = simple_form_for @user, url: password_reset_url(params[:id]) do |f|
       p
         = f.input :password
@@ -9,7 +9,7 @@ p
       p
         = f.button  :submit, "Confirm"
 p
-  -if !@user.present? || !@user.has_active_token?(@user)
+  -if !@user.present? || !@user.has_active_token?
     p This link is not relevant
     = link_to 'Reset password again', new_password_reset_path
 
