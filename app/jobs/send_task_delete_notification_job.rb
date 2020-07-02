@@ -3,10 +3,8 @@ class SendTaskDeleteNotificationJob < ApplicationJob
   sidekiq_throttle_as :mailer
   sidekiq_options lock: :until_and_while_executing, on_conflict: { client: :log, server: :reject }
 
-  def perform(task_id)
-    task = Task.find_by(id: task_id)
-    return if task.blank?
-
-    UserMailer.with(user: task.author, task: task).task_deleted.deliver_now
+  def perform(task_id,task_author)
+    user = User.find(task_author)
+    UserMailer.with(user: user, task: task_id).task_deleted.deliver_now
   end
 end

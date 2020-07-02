@@ -46,6 +46,6 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Deleted', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was deleted")
+    assert email.body.to_s.include?("Task #{@task_id} was deleted")
   end
 end
