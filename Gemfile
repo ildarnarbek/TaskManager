@@ -78,3 +78,7 @@ gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidekiq-throttled'
 gem 'sidekiq-unique-jobs', '~> 6.0.13'
+gem 'aws-sdk-s3', require: false
+gem 'mini_magick'
+gem 'virtus'
+gem 'file_validators'
