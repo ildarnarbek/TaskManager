@@ -1,0 +1,8 @@
+h4 Forgot password?
+p please enter your email address to reset your password
+
+= simple_form_for @password_reset, url: password_resets_url do |f|
+  p
+    = f.input :email
+  p
+    = f.button  :submit, "Confirm"

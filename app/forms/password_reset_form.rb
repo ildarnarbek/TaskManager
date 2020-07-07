@@ -1,13 +1,11 @@
-class SessionForm
+class PasswordResetForm
   include ActiveModel::Model
 
   attr_accessor(
     :email,
-    :password,
   )
 
   validates :email, presence: true, format: { with: /\A\S+@.+\.\S+\z/ }
-  validates :password, presence: true
   validate :user_valid?
 
   def user
@@ -17,8 +15,8 @@ class SessionForm
   private
 
   def user_valid?
-    if user.blank? || !user.authenticate(password)
-      errors.add(:email, "email or password doesn't match")
+    if user.blank?
+      errors.add(:email, 'There is no user with this email in the database')
     end
   end
 end

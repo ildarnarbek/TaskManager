@@ -7,4 +7,19 @@ class User < ApplicationRecord
   validates :first_name, length: { minimum: 2 }
   validates :last_name, length: { minimum: 2 }
   validates :email, format: { with: /@/ }, uniqueness: true
+  validates :password_reset_token, uniqueness: { allow_blank: true, allow_nil: true }
+
+  def generate_token
+    update(password_reset_token: SecureRandom.urlsafe_base64,
+           password_reset_sent_at: Time.current)
+  end
+
+  def delete_password_reset_token
+    update(password_reset_token: nil,
+           password_reset_sent_at: nil)
+  end
+
+  def has_active_token?
+    self.password_reset_sent_at + 24.hour > Time.current
+  end
 end
