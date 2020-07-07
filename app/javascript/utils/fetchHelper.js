@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import objectToFormData from 'object-to-formdata';
+import { serialize } from 'object-to-formdata';
 
 import { camelize, decamelize } from './keysConverter';
 
@@ -48,12 +48,12 @@ export default {
 
   post(url, json) {
     const body = decamelize(json);
+
     return axios.post(url, body).then(camelize);
   },
 
   put(url, json) {
     const body = decamelize(json);
-
     return axios.put(url, body).then(camelize);
   },
 
@@ -64,11 +64,24 @@ export default {
   },
 
   putFormData(url, json) {
-    const body = decamelize(json);
-    const formData = objectToFormData(body);
+    if (json) {
+      const { image } = json.attachment;
+      const body = decamelize(json);
+      body.attachment.image = image;
+      const formData = serialize(body);
 
+      return axios
+        .put(url, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(camelize);
+    }
+
+    const body = decamelize(json);
     return axios
-      .put(url, formData, {
+      .put(url, body, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

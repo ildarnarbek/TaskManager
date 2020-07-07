@@ -149,6 +149,14 @@ const TaskBoard = () => {
     });
   };
 
+  const handleImageUpdate = (task, attachment) => {
+    return TasksRepository.attachImage(task.id, attachment);
+  };
+
+  const handleImageDestroy = (task) => {
+    return TasksRepository.removeImage(task.id);
+  };
+
   return (
     <>
       <Fab onClick={handleOpenAddPopup} className={useStyles.addButton} color="primary" aria-label="add">
@@ -162,6 +170,8 @@ const TaskBoard = () => {
           onCardUpdate={handleTaskUpdate}
           onClose={handleClose}
           cardId={openedTaskId}
+          onImageUpdate={handleImageUpdate}
+          onImageDestroy={handleImageDestroy}
         />
       )}
       <KanbanBoard
