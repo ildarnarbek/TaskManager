@@ -8,7 +8,7 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_created
 
     assert_emails 1 do
-      email.deliver_now
+      email.deliver_later
     end
 
     assert_equal ['noreply@taskmanager.com'], email.from
@@ -24,7 +24,7 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_updated
 
     assert_emails 1 do
-      email.deliver_now
+      email.deliver_later
     end
 
     assert_equal ['noreply@taskmanager.com'], email.from
@@ -40,12 +40,12 @@ class UserMailerTest < ActionMailer::TestCase
     email = UserMailer.with(params).task_deleted
 
     assert_emails 1 do
-      email.deliver_now
+      email.deliver_later
     end
 
     assert_equal ['noreply@taskmanager.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Deleted', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was deleted")
+    assert email.body.to_s.include?("Task #{@task_id} was deleted")
   end
 end

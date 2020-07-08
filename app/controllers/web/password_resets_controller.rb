@@ -11,7 +11,7 @@ class Web::PasswordResetsController < ApplicationController
     if @password_reset.valid?
       @user.generate_token
       redirect_to(password_resets_path)
-      UserMailer.with({ user: @user }).password_reset.deliver_now
+      SendPasswordResetNotificationJob.perform_async(@user.email)
     else
       redirect_to(new_password_reset_path)
     end

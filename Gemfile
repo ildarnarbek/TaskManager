@@ -74,3 +74,7 @@ gem 'coveralls', require: false
 gem 'bullet', group: 'development'
 gem 'rollbar'
 gem 'newrelic_rpm'
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
+gem 'sidekiq-unique-jobs', '~> 6.0.13'
