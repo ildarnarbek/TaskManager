@@ -8,4 +8,5 @@ export default new PropTypesPresenter({
   state: PropTypes.string,
   author: PropTypes.shape(),
   assignee: PropTypes.shape(),
+  imageUrl: PropTypes.string,
 });
